@@ -1,0 +1,52 @@
+Identificar os candidatos a nomes próprios do texto e a frequência com que aparecem:
+import string
+
+def Proprio(texto):
+    L=[]
+    N=[]
+    for pa in texto.split():
+        if pa.istitle() is True:
+            L.append(pa)
+            n = texto.count(pa)
+            N.append(n)
+            
+    for item in L:
+        a = ""
+        posicao = texto.find(item)
+        while a == "":
+            posicao = posicao - 1
+            a = texto[posicao]
+        if a in '!?.':
+            b = L.index(item)
+            L.pop(b)
+            
+    return {x:y for x,y in zip(L,N)}
+   
+
+
+Identificar as 5 palavras mais comuns: 
+
+def comum(texto):
+    quantos_cada = {x:texto.count(x) for x in texto.split()}
+    organizado = [[x,y] for x,y in zip(quantos_cada.values(),quantos_cada.keys())]
+    organizado.sort()
+    decrescente = organizado[-1::-1]
+    
+    print('As 5 palavras mais comuns são:')
+    for pala in range(5):
+        print(decrescente[pala][1])
+
+
+
+Salvar os resultados em um arquivo chamado "respostas_q2.txt" no computador: 
+
+def tritongo2(texto):
+    
+    texto_pala = texto.split()
+    for x in texto_pala:
+        a = 0
+        for b in range(len(x)-2):
+            if x[b] in 'aeiou' and x[b+1] in 'aeiou' and x[b+2] in 'aeiou':
+                for item in string.punctuation:
+                    x = x.replace(item,'')              
+                print(x)
